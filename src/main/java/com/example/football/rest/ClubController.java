@@ -36,4 +36,20 @@ public class ClubController {
         return ResponseEntity.ok(clubService.addClub(club));
     }
 
+    @PostMapping("/updateClub")
+    public ResponseEntity<?> updateClub(@RequestBody Club club) {
+        club.setLeagues(leaguesService.getLeaguesById(club.getLeagues().getLeaguesId()));
+        return ResponseEntity.ok(clubService.updateClub(club));
+    }
+
+    @PostMapping("/deleteClub")
+    public ResponseEntity<?> deleteClub(@RequestBody Club club){
+        club.setLeagues(leaguesService.getLeaguesById(club.getLeagues().getLeaguesId()));
+        clubService.addClub(club);
+        return ResponseEntity.ok("Done!");
+    }
+
+
+
+
 }
